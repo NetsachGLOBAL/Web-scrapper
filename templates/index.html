@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scrapper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Web Scrapper</h1>
+        <form method="POST" action="/">
+            <label for="url">Enter URL:</label>
+            <input type="text" id="url" name="url" placeholder="example.com" required>
+            <button type="submit">Fetch Info</button>
+        </form>
+
+        {% if url %}
+        <div class="results">
+            <h2>Results for {{ url }}</h2>
+
+            <h3>Social Media Links:</h3>
+            {% if links %}
+            <ul>
+                {% for link in links %}
+                <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No social media links found.</p>
+            {% endif %}
+
+            <h3>Emails:</h3>
+            {% if emails %}
+            <ul>
+                {% for email in emails %}
+                <li>{{ email }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No emails found.</p>
+            {% endif %}
+
+            <h3>Phone Numbers:</h3>
+            {% if phones %}
+            <ul>
+                {% for phone in phones %}
+                <li>{{ phone }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No phone numbers found.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
