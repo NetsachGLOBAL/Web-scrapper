@@ -34,8 +34,11 @@ def normalize_url(url):
     """Normalize the URL by ensuring it has a scheme."""
     parsed_url = urlparse(url)
     if not parsed_url.scheme:
-        url = 'http://' + url
-    return url
+        url = 'https://' + url  # Default to https
+    elif parsed_url.scheme not in ['http', 'https']:
+        url = 'https://' + url
+
+
 
 def fetch_links_and_contact_info(url):
     """Fetch links, emails, and phones from a static page."""
